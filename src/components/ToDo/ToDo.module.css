@@ -1,0 +1,53 @@
+.frame {
+  min-height: 300px;
+  max-width: 500px;
+  margin: 150px auto;
+}
+
+.frame input {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(196, 195, 195);
+  outline: none;
+  padding: 0 10px;
+}
+
+.frame button {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background-color:darkseagreen;
+  color: white;
+  margin: 10px 0;
+  font-size: 20px; 
+  cursor: pointer;
+}
+
+.frame button:active {
+  background-color:rgb(167, 75, 14);
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 10px;
+  list-style-type: none;
+}
+
+.list li {
+  background-color: white;
+  min-height: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 5px;
+}
