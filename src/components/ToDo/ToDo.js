@@ -6,6 +6,7 @@ class ToDo extends React.Component {
   state = {
     inpVal: "",
     tasks: [],
+    isChecked: false,
   }
 
   handleChange = (e) => {
@@ -13,13 +14,13 @@ class ToDo extends React.Component {
       inpVal: e.target.value,
     })
   }
-  
+
   handleClick = (e) => {
-    let {tasks} = this.state
+    let { tasks } = this.state
     let inpVal = this.state.inpVal.trim()
 
-    if(!inpVal) {
-      return 
+    if (!inpVal) {
+      return
     }
 
     this.setState({
@@ -29,11 +30,22 @@ class ToDo extends React.Component {
     })
   }
 
+  handleChecked = (e) => {
+    e.stopPropagation()
+    this.setState({
+      isChecked: !this.state.isChecked,
+    })
+    
+  }
+
   render() {
     const { tasks } = this.state;
     const li = tasks.map((item, index) => {
       return (
-        <li key={index}>{item}</li>
+        <li key={index} className={style.listItem}>
+          {item}
+          <input id={`chekBox${index + 1}`} onChange={this.handleChecked} checked={this.state.isChecked ? alert("true") : alert("false")} type="checkbox" />
+        </li>
       )
     })
 
