@@ -3,13 +3,15 @@ import style from './ToDo.module.css';
 import generateID from '../../helpers/generateID';
 import image from '../../assets/images/avatar.png'
 
-console.log(generateID())
 
 class ToDo extends React.Component {
 
   state = {
     inpVal: "",
+    ageVal: "",
+    profVal: "",
     tasks: [],
+    selectedTasks: new Set(),
   }
 
   handleChange = (e) => {
@@ -18,9 +20,23 @@ class ToDo extends React.Component {
     })
   }
 
+  handleChange1 = (e) => {
+    this.setState({
+      ageVal: e.target.value,
+    })
+  }
+
+  handleChange2 = (e) => {
+    this.setState({
+      profVal: e.target.value,
+    })
+  }
+
   handleClick = (e) => {
     let { tasks } = this.state
-    let inpVal = this.state.inpVal.trim()
+    let inpVal = this.state.inpVal.trim();
+    let ageVal = this.state.ageVal.trim();
+    let profVal = this.state.profVal.trim();
 
     if (!inpVal) {
       return
@@ -28,12 +44,16 @@ class ToDo extends React.Component {
 
     const taskObject = {
       _id: generateID(),
-      title: inpVal
+      title: inpVal,
+      age: ageVal,
+      profession: profVal,
     }
 
     this.setState({
       tasks: [...tasks, taskObject],
       inpVal: "",
+      ageVal: "",
+      profVal: "",
 
     })
   }
@@ -46,22 +66,61 @@ class ToDo extends React.Component {
     })
   }
 
+  handleCheck = (taskId) => {
+    const selectedTasks = new Set(this.state.selectedTasks);
+
+    if (selectedTasks.has(taskId)) {
+      selectedTasks.delete(taskId)
+    } else {
+      selectedTasks.add(taskId)
+    }
+
+    this.setState({
+      selectedTasks
+    })
+
+    // console.log(selectedTasks)
+  }
+
+  removeTasks = () => {
+    const { selectedTasks, tasks } = this.state;
+
+
+    const newTasks = tasks.filter(task => {
+      if (selectedTasks.has(task._id)) {
+        return false;
+      }
+
+      return true;
+    })
+
+
+    this.setState({
+      tasks: newTasks,
+      selectedTasks: new Set()
+    })
+  }
+
   render() {
     const { tasks } = this.state;
     const list = tasks.map((item) => {
       return (
         <div key={item._id} className={style.listItem}>
-        <input type="checkbox" className={style.check}/>
+          <input type="checkbox" className={style.check} onChange={() => this.handleCheck(item._id)} />
           <div>
             <img src={image} alt="" />
           </div>
           <div>
-            <span>Task Title:</span>
+            <span>Name:</span>
             {item.title}
           </div>
           <div>
-            <span>Description: </span>
-            <p>lorem  ipsum dolor amet</p>
+            <span>Age:</span>
+            {item.age}
+          </div>
+          <div>
+            <span>Profession: </span>
+            {item.profession}
           </div>
           <button onClick={() => this.deleteTask(item._id)}>Delete</button>
         </div>
@@ -70,8 +129,22 @@ class ToDo extends React.Component {
 
     return (
       <div className={style.frame}>
-        <input value={this.state.inpVal} onChange={this.handleChange} />
+        <div>
+          <h2>Add Name</h2>
+          <input value={this.state.inpVal} onChange={this.handleChange} />
+        </div>
+        <div>
+          <h2>Add Age</h2>
+          <input value={this.state.ageVal} onChange={this.handleChange1} />
+        </div>
+        <div>
+          <h2>Add Profession</h2>
+          <input value={this.state.profVal} onChange={this.handleChange2} />
+        </div>
         <button onClick={this.handleClick}>Add Task</button>
+        <div>
+          <button className={style.danger} onClick={this.removeTasks} disabled={!this.state.selectedTasks.size}>Remove all Tasks</button>
+        </div>
         <div className={style.list}>
           {list}
         </div>
