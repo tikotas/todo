@@ -96,7 +96,7 @@
 .listItem button {
   margin: 10px 0;
   background-color: red;
-  color: white;
+  /* color: white; */
   font-size: 20px;
   border: none;
   border-radius: 5px;

@@ -122,7 +122,7 @@ class ToDo extends React.Component {
             <span>Profession: </span>
             {item.profession}
           </div>
-          <button onClick={() => this.deleteTask(item._id)}>Delete</button>
+          <button onClick={() => this.deleteTask(item._id)} disabled={this.state.selectedTasks.size}>Delete</button>
         </div>
       )
     })
