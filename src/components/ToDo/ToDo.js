@@ -51,20 +51,17 @@ class ToDo extends React.Component {
     const list = tasks.map((item) => {
       return (
         <div key={item._id} className={style.listItem}>
-        <div>
-        <img src={image} alt=""/>
-        </div>
+        <input type="checkbox" className={style.check}/>
           <div>
-            <span>Task ID:</span>
-            {item._id}
+            <img src={image} alt="" />
           </div>
           <div>
             <span>Task Title:</span>
             {item.title}
           </div>
           <div>
-          <span>Description: </span>
-          <p>lorem  ipsum dolor amet</p>
+            <span>Description: </span>
+            <p>lorem  ipsum dolor amet</p>
           </div>
           <button onClick={() => this.deleteTask(item._id)}>Delete</button>
         </div>
