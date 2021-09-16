@@ -44,7 +44,7 @@ class ToDo extends React.Component {
       return (
         <li key={index} className={style.listItem}>
           {item}
-          <input id={`chekBox${index + 1}`} onChange={this.handleChecked} checked={this.state.isChecked ? alert("true") : alert("false")} type="checkbox" />
+          <input id={`chekBox${index + 1}`} onChange={this.handleChecked} checked={this.state.isChecked} type="checkbox" />
         </li>
       )
     })
