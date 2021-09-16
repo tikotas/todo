@@ -1,12 +1,15 @@
 import React from 'react';
-import style from './ToDo.module.css'
+import style from './ToDo.module.css';
+import generateID from '../../helpers/generateID';
+import image from '../../assets/images/avatar.png'
+
+console.log(generateID())
 
 class ToDo extends React.Component {
 
   state = {
     inpVal: "",
     tasks: [],
-    isChecked: false,
   }
 
   handleChange = (e) => {
@@ -23,29 +26,48 @@ class ToDo extends React.Component {
       return
     }
 
+    const taskObject = {
+      _id: generateID(),
+      title: inpVal
+    }
+
     this.setState({
-      tasks: [...tasks, inpVal],
+      tasks: [...tasks, taskObject],
       inpVal: "",
 
     })
   }
 
-  handleChecked = (e) => {
-    e.stopPropagation()
+  deleteTask = (taskId) => {
+    const newTask = this.state.tasks.filter(item => taskId !== item._id);
+
     this.setState({
-      isChecked: !this.state.isChecked,
+      tasks: newTask
     })
-    
   }
 
   render() {
     const { tasks } = this.state;
-    const li = tasks.map((item, index) => {
+    const list = tasks.map((item) => {
       return (
-        <li key={index} className={style.listItem}>
-          {item}
-          <input id={`chekBox${index + 1}`} onChange={this.handleChecked} checked={this.state.isChecked ? alert("true") : alert("false")} type="checkbox" />
-        </li>
+        <div key={item._id} className={style.listItem}>
+        <div>
+        <img src={image} alt=""/>
+        </div>
+          <div>
+            <span>Task ID:</span>
+            {item._id}
+          </div>
+          <div>
+            <span>Task Title:</span>
+            {item.title}
+          </div>
+          <div>
+          <span>Description: </span>
+          <p>lorem  ipsum dolor amet</p>
+          </div>
+          <button onClick={() => this.deleteTask(item._id)}>Delete</button>
+        </div>
       )
     })
 
@@ -53,9 +75,9 @@ class ToDo extends React.Component {
       <div className={style.frame}>
         <input value={this.state.inpVal} onChange={this.handleChange} />
         <button onClick={this.handleClick}>Add Task</button>
-        <ul className={style.list}>
-          {li}
-        </ul>
+        <div className={style.list}>
+          {list}
+        </div>
       </div>
     );
   }
