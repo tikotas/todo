@@ -141,7 +141,7 @@ class ToDo extends React.Component {
           <h2>Add Profession</h2>
           <input value={this.state.profVal} onChange={this.handleChange2} />
         </div>
-        <button onClick={this.handleClick}>Add Task</button>
+        <button onClick={this.handleClick} disabled={this.state.selectedTasks.size}>Add Task</button>
         <div>
           <button className={style.danger} onClick={this.removeTasks} disabled={!this.state.selectedTasks.size}>Remove all Tasks</button>
         </div>
