@@ -129,21 +129,23 @@ class ToDo extends React.Component {
 
     return (
       <div className={style.frame}>
-        <div>
-          <h2>Add Name</h2>
-          <input value={this.state.inpVal} onChange={this.handleChange} />
-        </div>
-        <div>
-          <h2>Add Age</h2>
-          <input value={this.state.ageVal} onChange={this.handleChange1} />
-        </div>
-        <div>
-          <h2>Add Profession</h2>
-          <input value={this.state.profVal} onChange={this.handleChange2} />
-        </div>
-        <button onClick={this.handleClick} disabled={this.state.selectedTasks.size}>Add Task</button>
-        <div>
-          <button className={style.danger} onClick={this.removeTasks} disabled={!this.state.selectedTasks.size}>Remove all Tasks</button>
+        <div className={style.innerFrame}>
+          <div className={style.inpBlocks}>
+            <h2>Add Name</h2>
+            <input value={this.state.inpVal} onChange={this.handleChange} />
+          </div>
+          <div className={style.inpBlocks}>
+            <h2>Add Age</h2>
+            <input value={this.state.ageVal} onChange={this.handleChange1} />
+          </div>
+          <div className={style.inpBlocks}>
+            <h2>Add Profession</h2>
+            <input value={this.state.profVal} onChange={this.handleChange2} />
+          </div>
+          <button onClick={this.handleClick} disabled={this.state.selectedTasks.size}>Add Task</button>
+          <div>
+            <button className={style.danger} onClick={this.removeTasks} disabled={!this.state.selectedTasks.size}>Remove all Tasks</button>
+          </div>
         </div>
         <div className={style.list}>
           {list}

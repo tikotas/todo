@@ -1,9 +1,15 @@
 .frame {
-  width: 50%;
+  width: 90%;
   margin: 150px auto;
 }
 
-.frame > div > input {
+.innerFrame {
+  width: 50%;
+  margin: auto;
+}
+
+
+.inpBlocks > input {
   width: 100%;
   height: 30px;
   border-radius: 5px;
@@ -12,11 +18,11 @@
   padding: 0 10px;
 }
 
-.frame h2 {
+.innerFrame h2 {
   text-align: center;
 }
 
-.frame > button {
+.innerFrame > button {
   width: 100%;
   height: 30px;
   border-radius: 5px;
